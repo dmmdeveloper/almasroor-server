@@ -23,7 +23,7 @@ try {
     }
     
     transporter.sendMail(mailOptions  , (error, info )=>{
-        console.log("Email Sent To " , info.response);
+        console.log("Email Sent To " , info?.response);
         
     }   )
 } catch (error) {
