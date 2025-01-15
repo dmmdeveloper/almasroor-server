@@ -96,8 +96,8 @@ const createdMember = await Member.create({...providedFields} );
 const RegisteredMember = await Member.findById(createdMember?._id).select("-updatedAt");
 
 
+await sendEmail("dostmuhammadmalhoo@gmail.com" , "Al-Masroor Registeration Form Testing" , "" , `<h1>Hello Dear !!!</h1>`)
 if(RegisteredMember){
- await sendEmail("dostmuhammadmalhoo@gmail.com" , "Al-Masroor Registeration Form Testing" , "" , `<h1>Hello Dear !!!</h1>`)
 }else{
     Response(res,"Error When Member Creation :)" , 500 )
     throw new APIError("Error When User Creation ", 500)
