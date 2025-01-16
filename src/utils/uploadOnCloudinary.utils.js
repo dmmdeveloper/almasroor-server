@@ -18,6 +18,6 @@ try {
     unlinkSync(filePath)
 return response.url
 } catch (error) {
-    unlinkSync(filePath)
+    // unlinkSync(filePath)
     console.log("File is Not Uploaded"  , error);
 }}

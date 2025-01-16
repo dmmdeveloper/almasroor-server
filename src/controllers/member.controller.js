@@ -36,17 +36,17 @@ for(let file of requiredFiles){
     }
 }
 
-const { name , father_name , religion , contact , cnic , work_post , work_place , office_contact , relative1_name , relative1_relation , relative1_contact ,relative2_name , relative2_relation,relative2_contact} = req.body;
-// console.log(name , father_name , religion,contact1 , contact2, cnic , work_post , work_place ,office_contact ,relative1_name ,  relative1_relation ,relative1_contact , relative2_name ,  relative2_relation , relative2_contact );
+const { name , father_name , religion , contact , cnic , post , work_place , office_contact , relative1_name , relative1_relation , relative1_contact ,relative2_name , relative2_relation,relative2_contact} = req.body;
+// console.log(name , father_name , religion,contact1 , contact2, cnic , post,office_contact ,relative1_name ,  relative1_relation ,relative1_contact , relative2_name ,  relative2_relation , relative2_contact );
 
-const requiredFields = [ "name" , "father_name" , "religion" , "contact"  , "cnic" , "work_post" , "work_place" , "office_contact" , "relative1_name" , "relative1_relation" , "relative1_contact",]
+const requiredFields = [ "name" , "father_name" , "religion" , "contact"  , "cnic" , "post" , "work_place" , "office_contact" , "relative1_name" , "relative1_relation" , "relative1_contact",]
 
 for( let field of requiredFields){
 
     if(!req.body[field]){
         Response(res , `${field} is Required :)`, 404)
         unlinkSync(photo[0]?.path)
-        unlinkSync(cnicPic[0]?.path)
+        // unlinkSync(cnicPic[0]?.path)
         unlinkSync(relativeOneCnicPic[0]?.path)
         if(relativeTwoCnicPic){
             unlinkSync(relativeTwoCnicPic[0]?.path)
@@ -81,7 +81,7 @@ if(relativeTwoCnicPic){
 
 const providedFields ={
 
-    name , father_name , religion ,contact , cnic , work_post , work_place , office_contact , relative1_name , relative1_contact , relative1_relation ,
+    name , father_name , religion ,contact , cnic , post ,work_place, office_contact , relative1_name , relative1_contact , relative1_relation ,
     photo:photoURL ,
     cnic_pic:cnicPicURL ,relative1_cnic_pic : relativeOneCnicPicURL 
 }
@@ -96,12 +96,14 @@ const createdMember = await Member.create({...providedFields} );
 const RegisteredMember = await Member.findById(createdMember?._id).select("-updatedAt");
 
 
-await sendEmail("dostmuhammadmalhoo@gmail.com" , "Al-Masroor Registeration Form Testing" , "" , `<h1>Hello Dear !!!</h1>`)
+sendEmail("dostmuhammadmalhoo@gmail.com" , "Al-Masroor Registeration Form Testing" , "" , `<h1>Hello Dear !!!</h1>`)
 if(RegisteredMember){
 }else{
     Response(res,"Error When Member Creation :)" , 500 )
     throw new APIError("Error When User Creation ", 500)
 }
+
+
 
 res.status(200)
     .json(

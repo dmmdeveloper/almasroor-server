@@ -2,6 +2,7 @@ import mongoose from "mongoose";
 
 const memberSchema = new mongoose.Schema({
 
+
     // APPLICANT DATA
     name :{
         type : String,
@@ -14,9 +15,8 @@ const memberSchema = new mongoose.Schema({
         required : true,
     },
     religion :{
+
         type : String,
-        enum :["Muslim", "Hindu", "Christian", "Ahmadiyya", "Sikh"],
-        default :"Muslim"
     },
     contact: {
         type:Number,
@@ -38,8 +38,6 @@ const memberSchema = new mongoose.Schema({
 // EMPLOYMENT DATA
 work_post:{
     type :String , 
-    enum :["Student" , "Employee"],
-    default :"Employee"
 },
 work_place :String,
 office_contact : Number, 
