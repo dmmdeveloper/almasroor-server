@@ -6,8 +6,8 @@ const app = express();
 
 //| App Configuration ||||
 
-app.use(express.json({limit:"50mb"}))
-app.use(express.urlencoded({limit:"50mb" , extended : true}))
+app.use(express.json({limit:50000}))
+app.use(express.urlencoded({limit:50000,extended:true}))
 app.use(express.static("public"))
 app.use(cookieParser());
 app.use(cors({
