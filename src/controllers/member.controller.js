@@ -117,4 +117,20 @@ res.status(200)
 });
 
 
-export { Register }
+
+const uploadFile = asyncHandler( async (req , res)=>{
+    console.log(req.url);
+    console.log(req.files);
+    
+
+    res
+    .status(200)
+    .json(
+        new APIResponse("File Uploaded Success Fully !!", {}, 200)
+    )
+    
+
+
+} )
+
+export { Register ,uploadFile }
