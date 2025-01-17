@@ -11,8 +11,8 @@ app.use(express.urlencoded({limit:"200kb" , extended : true}))
 app.use(express.static("public"))
 app.use(cookieParser());
 app.use(cors({
-    origin:"http://localhost:5173",
-    // origin:"https://almasroorhstl.vercel.app",
+    // origin:"http://localhost:5173",
+    origin:"https://almasroorhstl.vercel.app",
     credentials:true ,
     methods:["POST", "GET"]
 }))
