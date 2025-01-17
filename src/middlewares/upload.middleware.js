@@ -5,6 +5,7 @@ import os from "node:os"
 
 // Configuration
 const storage  = multer.diskStorage({
+
     destination : function (req , file , cb) {
         const tmpDir  =os.tmpdir(); 
         cb(null , tmpDir)
@@ -12,6 +13,6 @@ const storage  = multer.diskStorage({
     filename : function (req , file , cb) {
         cb(null  , `${Math.floor(Math.random()*9999)}_${file.originalname}`)        
     }
-})
+});
 
-export const upload = multer({storage})
+export const upload = multer({storage});

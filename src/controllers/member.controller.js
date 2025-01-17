@@ -25,7 +25,7 @@ const Register =asyncHandler( async ( req , res  )=>{
 
 // Text Data
 const { photo , cnicPic ,relativeOneCnicPic ,relativeTwoCnicPic } = req.files;
-console.log(photo , "\n", cnicPic , "\n" , relativeOneCnicPic , "\n" , relativeTwoCnicPic , "\n");
+console.log(photo[0]?.path , "\n", cnicPic[0]?.path , "\n" , relativeOneCnicPic[0]?.path , "\n" ,"\n");
 
 const requiredFiles =  [ "photo" , "cnicPic" ,"relativeOneCnicPic"]
 
