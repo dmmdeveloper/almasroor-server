@@ -14,6 +14,7 @@ cloudinary.config({
 export const uploadOnCloudinary  = async(filePath)=>{
 try {
 
+    if(!filePath) return;
     const response = await cloudinary.uploader.upload(filePath)
     unlinkSync(filePath)
 return response.url

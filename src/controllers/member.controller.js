@@ -25,6 +25,7 @@ const Register =asyncHandler( async ( req , res  )=>{
 
 // Text Data
 const { photo , cnicPic ,relativeOneCnicPic ,relativeTwoCnicPic } = req.files;
+console.log(photo , "\n", cnicPic , "\n" , relativeOneCnicPic , "\n" , relativeTwoCnicPic , "\n");
 
 const requiredFiles =  [ "photo" , "cnicPic" ,"relativeOneCnicPic"]
 
@@ -32,7 +33,6 @@ for(let file of requiredFiles){
     if( !req.files[file]){
         Response(res  , `${file} is Required :)` , 404)
         throw new APIError(`${file} is Required :)`, 404)
-
     }
 }
 
@@ -117,19 +117,29 @@ res.status(200)
 });
 
 
-
 const uploadFile = asyncHandler( async (req , res)=>{
+
     console.log(req.url);
-    console.log(req.files);
+
+    const file = req.files?.file[0].path||null;
+    console.log(file);
     
+
+if(!file){
+    Response(res , "File Is Required", 404)
+    throw new APIError("File Is Required :)" , 404)
+}
+
+
+const fileURL = await uploadOnCloudinary(file);
+
+// Deploy and Test from POstman
+
 
     res
     .status(200)
     .json(
-        new APIResponse("File Uploaded Success Fully !!", {}, 200)
-    )
-    
-
+        new APIResponse("File Uploaded Success Fully !!", {file , fileURL}, 200)    )
 
 } )
 
