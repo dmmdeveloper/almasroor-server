@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
+import jwt from "jsonwebtoken";
 
 const memberSchema = new mongoose.Schema({
+
 
 
     // APPLICANT DATA
@@ -73,6 +75,15 @@ relative2_contact :Number,
 relative2_cnic_pic:String,
 form_no :Number,
 
+// general
+token : String ,
+msg : {
+    type :Boolean ,
+    default : false
+
+}
+
+
 } , {timestamps : true});
 
 // pre hook which add in form_no random form Number => math.floor( math.random()*9)+math.floor( math.random()*99)+math.floor( math.random()*999)
@@ -82,5 +93,13 @@ this.form_no = (Math.floor(Math.random()*9)*Math.floor(Math.random()*99)+Math.fl
 next();
 });
 
+
+memberSchema.methods.generateToken = function () {
+
+return jwt.sign(
+    {_id : this._id} , 
+    process.env.TOKEN_SECRET ,
+    { expiresIn : "10d"});
+}
 
 export const Member = mongoose.model("Member" , memberSchema);

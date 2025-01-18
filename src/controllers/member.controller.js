@@ -2,13 +2,31 @@ import { Member } from "../models/members.model.js";
 import { APIError } from "../utils/apierror.utils.js";
 import { APIResponse, Response } from "../utils/apiresponse.utils.js";
 import asyncHandler from "../utils/asynchandler.utils.js";
-import {unlinkSync} from "node:fs"
+import {unlinkSync} from "node:fs";
 import { uploadOnCloudinary } from "../utils/uploadOnCloudinary.utils.js";
 import { sendEmail } from "../utils/sendMail.utils.js";
 
 
+const generateToken = async(id)=>{
+
+try {
+    const findMember  = await Member.findById(id)
+    const token = findMember.generateToken(findMember?._id)
+    
+    findMember.token = token; 
+    await findMember.save();
+    
+    
+    return token
+} catch (error) {
+throw new APIError("Error When Token Generated:)" ,)    
+    
+}
+
+}
 
 const Register =asyncHandler( async ( req , res  )=>{
+
     console.log(req.url);
     
     // Get Data
@@ -25,7 +43,7 @@ const Register =asyncHandler( async ( req , res  )=>{
 
 // Text Data
 const { photo , cnicPic ,relativeOneCnicPic ,relativeTwoCnicPic } = req.files;
-console.log(photo[0]?.path , "\n", cnicPic[0]?.path , "\n" , relativeOneCnicPic[0]?.path , "\n" ,"\n");
+// console.log(photo[0]?.path , "\n", cnicPic[0]?.path , "\n" , relativeOneCnicPic[0]?.path , "\n" ,"\n");
 
 const requiredFiles =  [ "photo" , "cnicPic" ,"relativeOneCnicPic"]
 
@@ -116,9 +134,17 @@ if(RegisteredMember){
     throw new APIError("Error When User Creation ", 500)
 }
 
+const token = await generateToken(RegisteredMember?._id);
 
+const options = {
+secure: true ,
+httpOnly :true , 
+sameSite : "none",
+maxAge : 7 * 24 * 60 * 60 * 1000
+};
 
 res.status(200)
+.cookie("token" , token  , options)
     .json(
         new APIResponse("Memeber Registered Success Fully !!",RegisteredMember, 201)
     );
@@ -154,6 +180,25 @@ const fileURL = await uploadOnCloudinary(file);
     .json(
         new APIResponse("File Uploaded Success Fully !!", {file , fileURL}, 200)    )
 
-} )
+});
 
-export { Register ,uploadFile }
+
+
+const members = asyncHandler( async ( req,res)=>{
+    console.log(req.url);
+
+    const members = await Member.find();
+
+
+
+
+
+
+    res
+    .status(200)
+    .json(
+        new APIResponse(`Members Are Fetched Success Fully !!  ${members.length} ` ,members , 200)
+    )
+})
+
+export { Register ,uploadFile , members }
