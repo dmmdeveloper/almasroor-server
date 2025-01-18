@@ -36,7 +36,7 @@ const memberSchema = new mongoose.Schema({
     },
 
 // EMPLOYMENT DATA
-post:{
+work_post:{
     type :String , 
 },
 work_place :String,

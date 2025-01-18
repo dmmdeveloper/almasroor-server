@@ -79,11 +79,24 @@ if(relativeTwoCnicPic){
     relativeTwoCnicPicURL = await uploadOnCloudinary(relativeTwoCnicPic[0]?.path)
 }
 
-const providedFields ={
 
-    name , father_name , religion ,contact , cnic , post ,work_place, office_contact , relative1_name , relative1_contact , relative1_relation ,
+
+const providedFields ={
+    
+    name , 
+    father_name ,
+    religion ,
+    contact ,
+    cnic ,
+    work_post: post ,
+    work_place,
+    office_contact , 
+    relative1_name , 
+    relative1_contact ,
+    relative1_relation ,
     photo:photoURL ,
-    cnic_pic:cnicPicURL ,relative1_cnic_pic : relativeOneCnicPicURL 
+    cnic_pic:cnicPicURL ,
+    relative1_cnic_pic : relativeOneCnicPicURL 
 }
 
 if( relative2_name)  providedFields.relative2_name = relative2_name;
