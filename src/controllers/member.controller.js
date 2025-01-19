@@ -8,10 +8,10 @@ import { sendEmail } from "../utils/sendMail.utils.js";
 
 
 const generateToken = async(id)=>{
-
+    
 try {
     const findMember  = await Member.findById(id)
-    const token = findMember.generateToken(findMember?._id)
+    const token = await  findMember.generateToken(findMember?._id)
     
     findMember.token = token; 
     await findMember.save();
