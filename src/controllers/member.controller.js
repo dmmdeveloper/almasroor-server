@@ -134,7 +134,7 @@ if(RegisteredMember){
     throw new APIError("Error When User Creation ", 500)
 }
 
-const token = await generateToken(RegisteredMember?._id);
+// const token = await generateToken(RegisteredMember?._id);
 
 const options = {
 secure: true ,
@@ -144,7 +144,7 @@ maxAge : 7 * 24 * 60 * 60 * 1000
 };
 
 res.status(200)
-.cookie("token" , token  , options)
+// .cookie("token" , token  , options)
     .json(
         new APIResponse("Memeber Registered Success Fully !!",RegisteredMember, 201)
     );
@@ -188,9 +188,6 @@ const members = asyncHandler( async ( req,res)=>{
     console.log(req.url);
 
     const members = await Member.find();
-
-
-
 
 
 
