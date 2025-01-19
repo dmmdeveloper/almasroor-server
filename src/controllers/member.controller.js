@@ -8,10 +8,10 @@ import { sendEmail } from "../utils/sendMail.utils.js";
 
 
 const generateToken = async(id)=>{
-    
+
 try {
     const findMember  = await Member.findById(id)
-    const token = await findMember.generateToken(findMember?._id)
+    const token = findMember.generateToken(findMember?._id)
     
     findMember.token = token; 
     await findMember.save();
@@ -78,15 +78,14 @@ const findMember = await Member.findOne({
 });
 
 if(findMember){
-
-    Response(res ,` Dear ${name} You Are Already Registered ! \n Thanks For Registration Again.` , 200);
+    Response(res ,` Dear ${findMember.name} You Are Already Registered ! \n Thanks For Registration Again.` , 200);
     unlinkSync(photo[0]?.path)
     unlinkSync(cnicPic[0]?.path)
     unlinkSync(relativeOneCnicPic[0]?.path)
     if(relativeTwoCnicPic){
         unlinkSync(relativeTwoCnicPic[0]?.path)
     }
-    return ;
+    throw new APIError("Memeber Already Registered !!", 400 )
 }
 
 
@@ -97,6 +96,8 @@ let  relativeTwoCnicPicURL ;
 if(relativeTwoCnicPic){
     relativeTwoCnicPicURL = await uploadOnCloudinary(relativeTwoCnicPic[0]?.path)
 }
+
+
 
 const providedFields ={
     
@@ -121,15 +122,18 @@ if( relative2_relation)  providedFields.relative2_relation  = relative2_relation
 if( relative2_contact) providedFields.relative2_contact  = relative2_contact;
 if(relativeTwoCnicPic) providedFields.relative2_cnic_pic = relativeTwoCnicPicURL;
 
+
 const createdMember = await Member.create({...providedFields} );
 const RegisteredMember = await Member.findById(createdMember?._id).select("-updatedAt");
 
 sendEmail("dostmuhammadmalhoo@gmail.com" , "Al-Masroor Registeration Form Testing" , "" , `<h1>Hello Dear !!!</h1>`)
-if(!RegisteredMember){
+if(RegisteredMember){
+}else{
     Response(res,"Error When Member Creation :)" , 500 )
     throw new APIError("Error When User Creation ", 500)
 }
-const token = await generateToken(createdMember?._id);
+
+// const token = await generateToken(RegisteredMember?._id);
 
 const options = {
 secure: true ,
@@ -138,8 +142,8 @@ sameSite : "none",
 maxAge : 7 * 24 * 60 * 60 * 1000
 };
 
- return  res.status(200)
-.cookie("token" , token  , options)
+res.status(200)
+// .cookie("token" , token  , options)
     .json(
         new APIResponse("Memeber Registered Success Fully !!",RegisteredMember, 201)
     );
