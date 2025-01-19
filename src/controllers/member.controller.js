@@ -11,7 +11,7 @@ const generateToken = async(id)=>{
     
 try {
     const findMember  = await Member.findById(id)
-    const token = await  findMember.generateToken(findMember?._id)
+    const token = await findMember.generateToken(findMember?._id)
     
     findMember.token = token; 
     await findMember.save();
@@ -26,6 +26,7 @@ throw new APIError("Error When Token Generated:)" ,)
 }
 
 const Register =asyncHandler( async ( req , res  )=>{
+
     console.log(req.url);
     
     // Get Data
@@ -124,13 +125,11 @@ const createdMember = await Member.create({...providedFields} );
 const RegisteredMember = await Member.findById(createdMember?._id).select("-updatedAt");
 
 sendEmail("dostmuhammadmalhoo@gmail.com" , "Al-Masroor Registeration Form Testing" , "" , `<h1>Hello Dear !!!</h1>`)
-if(RegisteredMember){
-}else{
+if(!RegisteredMember){
     Response(res,"Error When Member Creation :)" , 500 )
     throw new APIError("Error When User Creation ", 500)
 }
-
-const token = await generateToken(RegisteredMember?._id);
+const token = await generateToken(createdMember?._id);
 
 const options = {
 secure: true ,
