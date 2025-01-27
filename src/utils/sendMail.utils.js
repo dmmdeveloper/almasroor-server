@@ -10,8 +10,8 @@ try {
     const transporter = nodemailer.createTransport({
         service :"gmail",
         auth:{
-            user :process.env.COMPANY_EMAIL,
-            pass :process.env.EMAIL_PASSWORD 
+            user :process.env.COMPANYeMAIL,
+            pass :process.env.EMAILpASSWORD 
         }
     })
 

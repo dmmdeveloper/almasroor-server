@@ -15,7 +15,7 @@ app.use(cors({
     origin:"https://almasroorhstl.vercel.app",
     credentials:true ,
     methods:["POST", "GET"]
-}))
+}));
 
 
 // Dafault Route "/"

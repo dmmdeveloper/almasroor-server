@@ -98,7 +98,7 @@ memberSchema.methods.generateToken = function () {
 
 return jwt.sign(
     {_id : this._id} , 
-    process.env.TOKEN_SECRET ,
+    process.env.TOKENsECRET ,
     { expiresIn : "10d"});
 }
 

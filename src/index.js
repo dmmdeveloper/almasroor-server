@@ -9,7 +9,7 @@ let port = process.env?.PORT || 4001
 
 DBConnection()
 .then( ()=>{
-    app.listen(port , ()=>{
+    app.listen(port,()=>{
         console.log(`=> App is Running On http://localhost:${port}`);
     })
 } )

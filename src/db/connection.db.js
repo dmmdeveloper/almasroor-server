@@ -8,7 +8,7 @@ export const DBConnection  = async ()=>{
     try {
         console.log(chalk.yellow("\t\t\t DB Connecting.........."));
 
-        const db = await mongoose.connect(`${process.env.DB_URL}/${dbName}`)
+        const db = await mongoose.connect(`${process.env.DBuRL}/${dbName}`)
 
         console.log(chalk.bgGreen("\tData Base Connected Succees Fully !!"));
         console.log("Host :" , db.connection.host);
