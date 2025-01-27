@@ -6,6 +6,7 @@ dotenv.config({path:".env"})
 export const sendEmail = (to, subject , text , html)=>{
 
 try {
+    
     const transporter = nodemailer.createTransport({
         service :"gmail",
         auth:{
@@ -13,7 +14,7 @@ try {
             pass :process.env.EMAIL_PASSWORD 
         }
     })
-        
+
     const mailOptions = {
         from :process.env.COMPANY_EMAIL,
         to,
