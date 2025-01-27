@@ -19,15 +19,14 @@ app.use(cors({
 
 // Dafault Route "/"
 app.get("/" , (req,res)=>{    
-    res.send(`<h3> Hello Dear Dost Muhammad , \n  You Are the dM-Developer  <hr> ${process.env?.HELLO} <hr> Email : ${process.env.COMPANYeMAIL} <br> PORT :   ${process.env.PORT} ,
-        <br> CLOUDnAME:   ${process.env.CLOUDnAME} 
-        <br> CLOUDaPIkEY :   ${process.env.CLOUDaPIkEY} 
+    res.send(`<h3> Hello Dear Dost Muhammad,\n  You Are the dM-Developer  <hr> ${process.env?.HELLO} <hr> Email : ${process.env.COMPANYeMAIL} <br> PORT : ${process.env.PORT} ,
+        // <br> CLOUDnAME:   ${process.env.CLOUDnAME} 
+        // <br> CLOUDaPIkEY :   ${process.env.CLOUDaPIkEY} 
         // <br> CLOUDaPIsECRET :   ${process.env.CLOUDaPIsECRET} 
         // <br> COMPANYeMAIL:   ${process.env.COMPANYeMAIL} 
         // <br> EMAILpASSWORD :   ${process.env.EMAILpASSWORD} 
         // <br> TOKENsECRET :   ${process.env.TOKENsECRET} 
-
-
+        // <br> DB_URL :   ${process.env.DBuRL} 
  </h3> 
         `)
 })
