@@ -9,7 +9,7 @@ export const DBConnection  = async ()=>{
         console.log(chalk.yellow("\t\t\t DB Connecting.........."));
 
         // mongodb+srv://dM-Developer:portfoliodb@cluster0.wgfx6.mongodb.net
-        const db = await mongoose.connect(`mongodb+srv://dostmm:dostmm@cluster0.zwozj.mongodb.net/${dbName}`)
+        const db = await mongoose.connect(`mongodb+srv://dM-Developer:portfoliodb@cluster0.wgfx6.mongodb.net/${dbName}`)
 
         console.log(chalk.bgGreen("\tData Base Connected Succees Fully !!"));
         console.log("Host :" , db.connection.host);
