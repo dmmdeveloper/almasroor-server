@@ -20,7 +20,7 @@ app.use(cors({
 
 // Dafault Route "/"
 app.get("/" , (req ,res)=>{    
-    res.send(`<h1> Hello Dear Dost Muhammad , \n  You Are the dM-Developer  <hr> ${process.env?.HELLO} </h1>`)
+    res.send(`<h1> Hello Dear Dost Muhammad , \n  You Are the dM-Developer  <hr> ${process.env?.HELLO} <hr> Email : ${process.env.COMPANYeMAIL} </h1>   `)
 })
 
 
