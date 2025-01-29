@@ -181,15 +181,9 @@ const fileURL = await uploadOnCloudinary(file);
 
 });
 
-
-
 const members = asyncHandler( async ( req,res)=>{
     console.log(req.url);
-
-    const members = await Member.find();
-
-
-
+    const members = await Member.find().sort({createdAt : -1});
     res
     .status(200)
     .json(
