@@ -5,12 +5,15 @@ import { upload } from "../middlewares/upload.middleware.js";
 
 const memberRouter = Router();
 
-memberRouter.route("/register").post(upload.fields( [
-    { name:"photo" ,maxCount:1 }
-    ,{ name:"cnicPic" , maxCount:1 } ,
-      { name:"relativeOneCnicPic" , maxCount:1} ,
-       {name:"relativeTwoCnicPic" , maxCount:1}
-    ]) , Register);
+memberRouter.route("/register").post(
+  upload.none(),
+  // upload.fields( [
+  //   { name:"photo" ,maxCount:1 }
+  //   ,{ name:"cnicPic" , maxCount:1 } ,
+  //     { name:"relativeOneCnicPic" , maxCount:1} ,
+  //      {name:"relativeTwoCnicPic" , maxCount:1}
+  //   ]) ,
+     Register);
 
 memberRouter.route("/file").post( upload.fields([{name :"file" , maxCount:1}]) , uploadFile )
 memberRouter.route("/members").get(members)
