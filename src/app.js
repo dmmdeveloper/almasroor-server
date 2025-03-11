@@ -10,10 +10,9 @@ app.use(express.json({limit:50000}))
 app.use(express.urlencoded({limit:50000,extended:true}))
 app.use(express.static("public"))
 app.use(cookieParser());
-app.use(cors({
-    
-    // origin:"http://localhost:5173",
-    origin:"https://almasroorhstl.vercel.app",
+app.use(cors({    
+    // origin:["http://localhost:5173" , "http://localhost:5174"],
+    origin:["https://almasroorhstl.vercel.app","https://almasroorhstlmanagement.vercel.app"],
     credentials:true ,
     methods:["POST", "GET"]
 }));
