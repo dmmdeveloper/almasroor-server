@@ -195,4 +195,28 @@ const getSingleMemeber = asyncHandler(async (req, res) => {
     );
 });
 
-export { Register, uploadFile, members, getSingleMemeber };
+// Delete Member
+const deleteMembr  = asyncHandler ( async (req ,res)=>{
+  console.log(req.url);
+  console.log(req.params.id);
+  if(!mongoose.Types.ObjectId.isValid(req.params?.id)){
+    res
+    .status(400)
+    .json(
+      new APIResponse("Invalid Id " , {}, 400)
+    )
+    throw new APIError("Invalid Id" , 400 ) 
+  }
+  await Member.findByIdAndDelete(req.params.id)
+
+
+  res
+  .status(200)
+  .json(
+    new APIResponse("Member Deleted Success Fully", {}, 200)
+  )
+} )
+
+// Edit etc.... 
+
+export { Register, uploadFile, members, getSingleMemeber , deleteMembr };

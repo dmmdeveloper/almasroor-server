@@ -14,7 +14,7 @@ app.use(cors({
     // origin:["http://localhost:5173" , "http://localhost:5174"],
     origin:["https://almasroorhstl.vercel.app","https://almasroorhstlmanagement.vercel.app"],
     credentials:true ,
-    methods:["POST", "GET"]
+    methods:["POST", "GET" , "DELETE"]
 }));
 
 // Dafault Route "/"

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  deleteMembr,
   getSingleMemeber,
   members,
   Register,
@@ -25,6 +26,7 @@ memberRouter
   .post(upload.fields([{ name: "file", maxCount: 1 }]), uploadFile);
 memberRouter.route("/members").get(members);
 memberRouter.route("/member/:id").get(getSingleMemeber);
+memberRouter.route("/delete/:id").delete(deleteMembr)
 
 // point to Noted That The name of file fields are Just a Pure English Alphabet
 // not use the underscore or the any number
